@@ -1,0 +1,164 @@
+.topContainer{
+    display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+background-color: #ccf0e1;
+padding: 0 5%;
+
+}
+.topContainer div{
+  font-size: 25px;
+}
+.allCategories{
+display: flex;
+flex-direction: row;
+gap:1rem;
+}
+.allCategories li{
+  font-size: 20px;
+}
+.allCategories li{
+    list-style: none;
+}
+li:hover{
+    cursor: pointer;
+}
+
+
+.inputTextContainer{
+    margin-top: 20px;
+    display: flex;
+     padding: 10px;
+    justify-content: center;
+  background-color: rgb(177, 249, 249);
+  
+}
+.inputAreaHeader{
+width:600px;
+background-color: white;
+height:30px;
+border: solid black 1px;
+}
+.toTypeTextInput{
+    display: flex;
+    flex-direction: column;
+}
+.inputTitle{
+width:600px;
+ max-height: 700px;
+    border: 1px solid #ccc;
+}
+.textArea{
+  width: 600px;
+   max-height: 500px;
+      border: 1px solid #ccc;
+  height: 100%;
+  outline: none;
+ resize: none;
+ scroll-behavior: smooth;
+}
+.buttonPosition{
+  margin-top: 20px;
+}
+.noteContainer{
+  display: flex;
+  min-height: 30px;
+  max-height: 650px;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.noteTopContainer{
+   border: 1px solid gray;
+    padding: 10px;
+  border-radius: 5px;
+    margin:10px;
+}
+
+
+.noteItem{
+
+  word-wrap: break-word;
+white-space: wrap;
+word-break: break-word;
+
+  max-width: 200px;
+  max-height: 200px;
+ 
+ overflow: hidden;
+
+
+  /* max-width: 300px; 
+  max-height:300px; */
+}
+
+.allNoteContainer{
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+ height: 100%;
+flex:1
+}
+
+.allNoteContainer > * {
+
+}
+.noteTitle{
+  border-bottom: 1px solid gray;
+  margin-bottom: 5px;
+}
+
+
+.editnoteContainer{
+  position: absolute;
+  top:150px;
+  left:30%;
+
+
+ 
+}
+.backgroundDark{
+background-color:rgba(139, 135, 135, 0.9);
+
+}
+
+.backgroundopacity{
+  opacity: 0.1;
+}
+
+.fulllHieght{
+min-height: 100vh;
+}
+
+
+@media screen and (max-width: 480px) {
+  .allCategories{
+    display: none;
+  }
+  .topContainer{
+    flex-direction: column;
+  }
+  .allCategories{
+    display: flex;
+    flex-direction: column;
+  }
+   .inputAreaHeader{
+   
+width:300px;
+}
+.inputTitle{
+width:300px;
+ max-height: 350px;
+}
+.textArea{
+  width:300px;
+   max-height: 250px;
+}
+.editnoteContainer{
+  position: absolute;
+  top:150px;
+  left:10%;
+}
+}
