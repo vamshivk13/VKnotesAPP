@@ -32,7 +32,7 @@ console.log(allNotes);
 
    },[userDetails])
   return (
-    <div>
+    <div className={styles.topNoteContainer}>
       <div  className={styles.allNoteContainer}>
       {allNotes.map((item:any)=>{
         return <NoteItem key={item._id}  dataItem={item}/>

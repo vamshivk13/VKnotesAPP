@@ -7,6 +7,7 @@ background-color: #ccf0e1;
 padding: 0 5%;
 
 }
+
 .topContainer div{
   font-size: 25px;
 }
@@ -30,15 +31,17 @@ li:hover{
     margin-top: 20px;
     display: flex;
      padding: 10px;
+     
     justify-content: center;
-  background-color: rgb(177, 249, 249);
+  background-image: linear-gradient(rgb(250, 228, 187),rgb(130, 237, 247));
   
 }
+
 .inputAreaHeader{
 width:600px;
 background-color: white;
 height:30px;
-border: solid black 1px;
+
 }
 .toTypeTextInput{
     display: flex;
@@ -102,9 +105,6 @@ word-break: break-word;
 flex:1
 }
 
-.allNoteContainer > * {
-
-}
 .noteTitle{
   border-bottom: 1px solid gray;
   margin-bottom: 5px;

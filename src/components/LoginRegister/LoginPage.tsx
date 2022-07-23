@@ -1,5 +1,5 @@
 import React ,{useEffect, useState} from 'react'
-import styles from "./login.module.css"
+import styles from "./form.module.css"
 import axios from 'axios'
 import {useSelector, useDispatch}  from 'react-redux'
 import { userActions } from '../../store/store';
@@ -38,20 +38,39 @@ function LoginPage() {
   
   return (
     <div className={styles.topContainer}>
-    <div className={styles.loginForm}>
-      <div className={styles.inputElements}>
-      <input  className={styles.textInput} type="text" placeholder='email' onChange={handleEmailInput}></input>
-       <input className={styles.textInput} type="password" placeholder='password' onChange={handlePasswordInput}></input> 
-       </div>
-       <button className={styles.submitButton}  type="button" onClick={handleLogin}>Login</button>
+     <form className={styles.form}>
+      <h1>Login</h1>
+      <div className={styles.inputElement}>
+        <label htmlFor='email'>Email</label>
+        <input value={email} placeholder='email'  onChange={handleEmailInput} type="text" id='email'></input>
+      </div>
+       <div className={styles.inputElement}>
+        <label htmlFor='password'>Password</label>
+        <input value={password} placeholder='password' onChange={handlePasswordInput} type="text" id='password'></input>
+      </div>
+      <button className={styles.buttonStyle} onClick={handleLogin} type='button'>login</button>
       <div className={styles.link}>
-      <Link to="/register">
-        New User? sign Up !
-       </Link>
+       <Link to="/register">
+         Create an Account
+       </Link> 
        </div>
-    </div>
-    </div>
+     </form>
+     </div>
   )
 }
 
 export default LoginPage
+//  <div className={styles.topContainer}>
+//     <form className={styles.loginForm}>
+//       <div className={styles.inputElements}>
+//       <input  className={styles.textInput} type="text" placeholder='email' onChange={handleEmailInput}></input>
+//        <input className={styles.textInput} type="password" placeholder='password' onChange={handlePasswordInput}></input> 
+//        </div>
+//        <button className={styles.submitButton}  type="button" onClick={handleLogin}>Login</button>
+//       <div className={styles.link}>
+//       <Link to="/register">
+//         New User? sign Up !
+//        </Link> 
+//        </div>
+//     </form>
+//     </div>

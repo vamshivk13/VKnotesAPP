@@ -49,6 +49,8 @@ textAreaRef.current.style.height="auto";
         }
     }
     dispatch(userActions.sendNotesToMdb(sendData))
+    setNoteText("")
+    setTitle("")
      setNotesModalVisible(false)
   }
 
