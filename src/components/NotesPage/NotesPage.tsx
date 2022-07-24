@@ -12,6 +12,7 @@ import API_URL from "../api";
 function NotesPage() {
     const userData:any=useSelector<any>((state)=>state.userReducer.userDetails)
       const editNote:any=useSelector<any>((state)=>state.userReducer.noteToEdit)
+       const [showAccount,setShowAccount]=useState(false)
       const [isAuthenticated,setIsAuthenticated]=useState<any>(false)
    console.log("editNote",editNote);
   const navigate=useNavigate();
@@ -59,14 +60,16 @@ function NotesPage() {
   function handleEditClose(){
     if( editNote!=null)
     dispatch(userActions.setNotetoEdit(null))
-
+   //setShowAccount(false)
   }
-
+ function toggleShowAccount(){
+  setShowAccount((prev)=>!prev)
+ }
   return <div className={`${styles.fulllHieght} ${editNote!=null?styles.backgroundDark:""}`}>
     {isAuthenticated&&
     <div >
     <div onClick={handleEditClose}>
-   <NavBar handleLogout={handleLogout}/>
+   <NavBar setShowAccount={toggleShowAccount} showAccount={showAccount} handleLogout={handleLogout}/>
    <NotesInput/>
    <AllNotes/>
     </div>

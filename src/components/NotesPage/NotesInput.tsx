@@ -66,7 +66,7 @@ textAreaRef.current.style.height="auto";
              <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
              </div>
              <div className={styles.buttonPosition}>
-             <button type='button' onClick={()=>setNotesModalVisible(false)}>close</button>
+             <button type='button' onClick={()=>setNotesModalVisible(false)}>Close</button>
              <button type='button' onClick={submitNote}>Done</button>
              </div>
            </div>

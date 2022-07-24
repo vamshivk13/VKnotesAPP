@@ -5,7 +5,6 @@
  align-items: center;
 background-color: #ccf0e1;
 padding: 0 5%;
-
 }
 
 .topContainer div{
@@ -15,6 +14,10 @@ padding: 0 5%;
 display: flex;
 flex-direction: row;
 gap:1rem;
+justify-content: center;
+align-items: center;
+height: 60px;
+cursor: pointer;
 }
 .allCategories li{
   font-size: 20px;
@@ -51,6 +54,8 @@ height:30px;
 width:600px;
  max-height: 700px;
     border: 1px solid #ccc;
+    outline: none;
+    font-size: 18px;
 }
 .textArea{
   width: 600px;
@@ -62,7 +67,21 @@ width:600px;
  scroll-behavior: smooth;
 }
 .buttonPosition{
-  margin-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+.buttonPosition button{
+  border:none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0px 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.buttonPosition button:hover{
+  background-color: rgb(120, 120, 248);
+  color: white;
 }
 .noteContainer{
   display: flex;
@@ -99,7 +118,8 @@ word-break: break-word;
 
 .allNoteContainer{
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
  height: 100%;
 flex:1
@@ -112,10 +132,12 @@ flex:1
 
 
 .editnoteContainer{
-  position: absolute;
-  top:150px;
-  left:30%;
-
+  position: fixed;
+  /* top:150px;
+  left:30%; */
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 
  
 }
@@ -161,4 +183,43 @@ width:300px;
   top:150px;
   left:10%;
 }
+}
+
+
+.dropDownButton{
+  position: relative;
+  padding: 7px 14px;
+}
+.dropDownButton:hover{
+  color: rgb(92, 92, 246);
+}
+.dropdownMenu{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 59px;
+    background-image: linear-gradient(rgb(247, 220, 169),rgb(115, 234, 245));
+
+  right: 5px;
+   border: none;
+  border-radius: 8px;
+  padding: 8px;
+}
+.dropdownMenu ul{
+  margin: 0;
+padding: 0;
+border-radius: 14px;
+}
+.dropdownMenu li{
+  font-size: 15px;
+  padding: 6px 10px;
+  text-align: center;
+  /* background-color: rgb(127, 225, 255); */
+  font-weight: "bold";
+  margin: 5px 0;
+}
+.dropdownMenu li:hover{
+  background-color: rgb(127, 127, 244);
 }

@@ -71,7 +71,6 @@ function handleClose(){
   dispatch(userActions.setNotetoEdit(null))
 }
   return ( 
- 
    <div className={styles.editnoteContainer}>
       <div className={styles.inputTextContainer}>    
            <div className={styles.toTypeTextInput}>
@@ -80,9 +79,9 @@ function handleClose(){
              <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
              </div>
              <div className={styles.buttonPosition}>
-             <button type='button' onClick={handleClose}>close</button>
+             <button type='button' onClick={handleClose}>Close</button>
              <button type='button' onClick={submitNote}>Done</button>
-             <button type="button" onClick={deleteNote}>delete</button>
+             <button type="button" onClick={deleteNote}>Delete</button>
              </div>
            </div>    
         </div>
