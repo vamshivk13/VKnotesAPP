@@ -21,8 +21,8 @@ function handleImportantNotes(){
     <div>Notes</div>
      <div className={styles.allCategories}>
      <div className={styles.dropDownButton} onClick={setShowAccount}>Account</div>
-      {showAccount&&
-      <div className={styles.dropdownMenu}>
+      {
+      <div className={`${styles.dropdownMenu} ${showAccount&&styles.active}`}>
       <ul> 
         <li>{userDetails.name}</li>
         <li>{userDetails.email}</li>

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { userActions } from '../../store/store';
 import {Link} from "react-router-dom"
 import API_URL from '../api';
+import Modal from '../Modal/Modal';
 function RegisterPage() {
   const url=API_URL.registerUser
    const dispatch=useDispatch<any>();
@@ -13,6 +14,7 @@ function RegisterPage() {
   const[name,setName]=useState<string>("");
   const [password,setPassword]=useState<string>("");
   const [cnfpassword,setCnfPassword]=useState<string>("");
+  const [error,setError]=useState<any>(null);
   function handleEmailInput(e:any){
    setEmail(e.target.value);
   }
@@ -28,13 +30,21 @@ function RegisterPage() {
   async function handleRegister(){
     if(password!=cnfpassword)
     {
-      alert("passwords doesnt match")
+      setError({
+        isVisible:true,
+        title:"Error",
+        message:"passwords does not match"
+        
+      })
       return;
     }
     const payload={url:url,
       userData:{name:name,email:email,password:password}
     }
   dispatch(userActions.registerUser(payload))
+  }
+  function setIsVisible(){
+    setError(null)
   }
   return(
     <div className={styles.topContainer}>
@@ -63,6 +73,7 @@ function RegisterPage() {
        </Link> 
        </div>
      </form>
+     <Modal error={error} setIsVisible={setIsVisible}></Modal>
     </div>)
   
 }
