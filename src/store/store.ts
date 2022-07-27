@@ -28,7 +28,12 @@ const userSlice = createSlice({
     userDetails: [],
     isLoggedIn:false,
     allNotes:[],
-    noteToEdit:null
+    noteToEdit:null,
+    isSideBarActive:false,
+    mode:"All Notes",
+    matchedNotes:[],
+    notifyMessage:null,
+    pinnedNotes:[]
   },
 
   reducers: {
@@ -68,6 +73,56 @@ const userSlice = createSlice({
     },
     deleteCurrentNotefromDb:(state,action)=>{
       
+    },
+    toggleSidebarActive:(state)=>{
+       state.isSideBarActive=!state.isSideBarActive
+    },
+    setCurrentMode:(state,action:any)=>{
+      state.mode=action.payload
+    },
+    setSearchMatchNotes:(state,action:any)=>{
+      const searchString=action.payload;
+      if(searchString.trim()==""){
+        state.matchedNotes=[];
+        return;
+      }
+      const matched=state.allNotes.filter((note:any)=>{
+        const isNoteMatched=note.note.toLowerCase().includes(searchString.toLowerCase())
+        const isNoteTitleMatched=note.noteTitle.toLowerCase().includes(searchString.toLowerCase())
+        if(isNoteMatched||isNoteTitleMatched)
+        {
+          return true;
+        }
+        return false;
+      })
+      state.matchedNotes=[...matched]
+    },
+    setNotifyMessage:(state,action:any)=>{
+      state.notifyMessage=action.payload
+    },
+    setPinnedNotes:(state:any,action:any)=>{
+        state.allNotes=state.allNotes.filter((item:any)=>{  
+        if(item._id==action.payload){
+          state.pinnedNotes.push(item)
+          return false;
+        }
+        return true;
+    })
+    },
+    setTrashNotesInDB:(state:any,action:any)=>{
+    
+    },
+    setTrashNotes:(state:any,action:any)=>{
+      state.trashNotes=action.payload;
+    },
+    restoreTrashNote:(state:any,action:any)=>{
+      
+    },
+    deleteTrashNoteFromDB:(state:any,action:any)=>{
+
+    },
+    deleteTrashNote:(state:any,action:any)=>{
+      state.trashNotes=state.trashNotes.filter((note:any)=>note._id!=action.payload)
     }
 
   },

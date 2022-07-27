@@ -1,0 +1,23 @@
+.searchBar{
+    display: flex;
+    flex:0.75;
+
+}
+.searchIconBar{
+    display: flex;
+    width: 70%;
+    align-items: center;
+}
+.searchIconBar.isActive{
+    border: 1px solid black;
+
+    box-shadow: 0px 4px 3px -2px rgb(23, 23, 23);
+}
+.searchIconBar> input{
+    font-size: 18px;
+    flex:1;
+    height: 20px;
+    border: none;
+    outline: none; 
+    background:transparent; 
+}

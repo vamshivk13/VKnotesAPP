@@ -9,15 +9,30 @@ import NotesInput from "./NotesInput";
 import styles from "./navbar.module.css"
 import NotesInputEdit from "./NotesInputEdit";
 import API_URL from "../api";
+import SideBar from "../SideBar/SideBar";
+import NotifyMessage from "../Notify/NotifyMessage";
+import { io } from "socket.io-client";
+import { baseUrl } from "../api";
 function NotesPage() {
     const userData:any=useSelector<any>((state)=>state.userReducer.userDetails)
       const editNote:any=useSelector<any>((state)=>state.userReducer.noteToEdit)
        const [showAccount,setShowAccount]=useState(false)
+    const isSideBarActive=useSelector((state:any)=>state.userReducer.isSideBarActive)
+    const matchedNotes=useSelector((state:any)=>state.userReducer.matchedNotes)
+    const trashNotes=useSelector((state:any)=>state.userReducer.trashNotes)
+    const mode=useSelector((state:any)=>state.userReducer.mode)
+
       const [isAuthenticated,setIsAuthenticated]=useState<any>(false)
    console.log("editNote",editNote);
   const navigate=useNavigate();
   const dispatch=useDispatch();
   const refreshtoken = API_URL.refreshToken;
+  const [socket,setSocket]=useState<any>(null)
+
+
+   useEffect(()=>{
+    setSocket(io(baseUrl))
+   },[])
 
    useEffect(() => {
    async function authorize(){
@@ -65,20 +80,42 @@ function NotesPage() {
  function toggleShowAccount(){
   setShowAccount((prev)=>!prev)
  }
-  return <div className={`${styles.fulllHieght} ${editNote!=null?styles.backgroundDark:""}`}>
+  return (
+    <>
+  <div className={`${styles.fulllHieght} ${editNote!=null?styles.backgroundDark:""}`}>
+    <NotifyMessage/>
     {isAuthenticated&&
+    <div style={{minHeight:"100vh"}} onClick={handleEditClose}>
     <div >
-    <div onClick={handleEditClose}>
    <NavBar setShowAccount={toggleShowAccount} showAccount={showAccount} handleLogout={handleLogout}/>
-   <NotesInput/>
+   <div className={styles.sideBarActive}>
+   <SideBar onBackDropPress={()=>{dispatch(userActions.toggleSidebarActive())}} isActive={isSideBarActive}/>
+   <div className={`${isSideBarActive&& styles.sidebarActiveScroll}`}>
+    {mode=="All Notes"&&
+    <>
+     
+   <NotesInput socket={socket}/>
    <AllNotes/>
-    </div>
-    {
-      editNote!=null&&<NotesInputEdit />
-    }
+   </>}
+   {
+    mode=="Search"&&
+    <AllNotes dataItem={matchedNotes}/>
+   }
+   {
+    mode=="Trash"&&
+    <AllNotes dataItem={trashNotes}/>
+   }
+   </div>
+   </div>
+    </div >
+   
     </div>
   }
-  </div>;
+   {
+      editNote!=null&&<NotesInputEdit />
+    }
+  </div>
+  </>);
 }
 
 export default NotesPage;

@@ -5,6 +5,7 @@ import {useSelector, useDispatch}  from 'react-redux'
 import { userActions } from '../../store/store';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import API_URL from '../api';
+import NotifyMessage from '../Notify/NotifyMessage';
 function LoginPage() {
   const [email,setEmail]=useState<string>("");
   const [password,setPassword]=useState<string>("");
@@ -38,6 +39,7 @@ function LoginPage() {
   
   return (
     <div className={styles.topContainer}>
+       <NotifyMessage/>
      <form className={styles.form}>
       <h1>Login</h1>
       <div className={styles.inputElement}>
@@ -46,7 +48,7 @@ function LoginPage() {
       </div>
        <div className={styles.inputElement}>
         <label htmlFor='password'>Password</label>
-        <input value={password} placeholder='password' onChange={handlePasswordInput} type="text" id='password'></input>
+        <input value={password} placeholder='password' onChange={handlePasswordInput} type="password" id='password'></input>
       </div>
       <button className={styles.buttonStyle} onClick={handleLogin} type='button'>login</button>
       <div className={styles.link}>

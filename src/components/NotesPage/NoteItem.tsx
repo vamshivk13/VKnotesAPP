@@ -13,7 +13,6 @@ function NoteItem({dataItem}:any) {
     <div className={styles.noteItem}>
     
      {dataItem.note}
-    
     </div>
     </div>
   )

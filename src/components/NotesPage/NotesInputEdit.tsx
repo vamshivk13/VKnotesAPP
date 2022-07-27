@@ -1,8 +1,15 @@
+import { IconButton } from '@mui/material';
 import React, { useRef, useState ,useId, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../store/store';
 import API_URL from '../api';
 import styles from "./navbar.module.css"
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 function NotesInput({initalNotes}:any) {
     const [noteText,setNoteText]=useState(initalNotes);
     const [title,setTitle]=useState("")
@@ -11,6 +18,7 @@ function NotesInput({initalNotes}:any) {
     const [beforeEditNote,setBeforeEditNote]=useState(null);
     const editNote:any=useSelector<any>((state)=>state.userReducer.noteToEdit)
     const userDetails:any=useSelector<any>((state)=>state.userReducer.userDetails)
+    const mode:any=useSelector<any>((state)=>state.userReducer.mode)
     const url=API_URL.updateNote
     const urldel=API_URL.deleteNote
     const dispatch=useDispatch();
@@ -64,29 +72,81 @@ textAreaRef.current.style.height="auto";
       }
     }
     dispatch(userActions.deleteCurrentNotefromDb(sendData))
+    dispatch(userActions.setNotifyMessage({
+      message:"Deleted Note Successfully"
+     }))
     dispatch(userActions.deleteCurrentNote(editNote))
        dispatch(userActions.setNotetoEdit(null))
+  }
+  function copyContent(){
+     navigator.clipboard.writeText(noteText)
+     dispatch(userActions.setNotifyMessage({
+      message:"Copied Successfully"
+     }))
   }
 function handleClose(){
   dispatch(userActions.setNotetoEdit(null))
 }
+function pinNote(){
+  dispatch(userActions.setPinnedNotes(editNote._id))
+}
+function deleteTrashNote(){
+  dispatch(userActions.deleteTrashNote(editNote._id))
+  dispatch(userActions.deleteTrashNoteFromDB({id:editNote._id}))
+ dispatch(userActions.setNotifyMessage({
+      message:"Note Permenantly Deleted"
+     }))   
+}
+function restoreNote(){
+  dispatch(userActions.deleteTrashNote(editNote._id))
+  dispatch(userActions.restoreTrashNote({id:editNote._id}))
+  dispatch(userActions.setNotifyMessage({
+      message:"Restored Successfully"
+     }))
+}
   return ( 
+
    <div className={styles.editnoteContainer}>
       <div className={styles.inputTextContainer}>    
            <div className={styles.toTypeTextInput}>
             <input onChange={handleTitle} value={title} className={styles.inputTitle} placeholder="Title" type="text"></input>
-             <div className={styles.inputElement}>
+             {/* <div className={styles.inputElement}> */}
              <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
-             </div>
+             {/* </div> */}
              <div className={styles.buttonPosition}>
-             <button type='button' onClick={handleClose}>Close</button>
-             <button type='button' onClick={submitNote}>Done</button>
-             <button type="button" onClick={deleteNote}>Delete</button>
+              <IconButton onClick={handleClose}>
+                <CloseIcon/>
+              </IconButton>
+              {mode!="Trash"&& <IconButton onClick={submitNote}>
+                <DoneIcon/>
+              </IconButton>}
+              {mode!="Trash"&&<IconButton onClick={deleteNote}>
+               <DeleteIcon/>
+              </IconButton>}
+              <IconButton onClick={copyContent}>
+              <ContentCopyIcon/>
+              </IconButton>
+              {
+                mode=="Trash"&& <IconButton onClick={restoreNote}>
+              <RestoreFromTrashIcon/>
+              </IconButton>
+              }
+               {
+                mode=="Trash"&& <IconButton onClick={deleteTrashNote}>
+              <DeleteForeverIcon/>
+              </IconButton>
+              }
+
+             
+              
+             {/* <button type='button' onClick={handleClose}>Close</button>
+             <button type='button' onClick={submitNote}>Done</button>*/}
+             {/* <button type="button" onClick={pinNote}>Pin</button>  */}
+             {/* <button type="button" onClick={restoreNote}>restore</button>  */}
              </div>
            </div>    
         </div>
         </div>
-
   )
 }
 

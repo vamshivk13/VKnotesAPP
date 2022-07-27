@@ -8,19 +8,19 @@ import RegisterPage from "./components/LoginRegister/RegisterPage";
 import NotesPage from "./components/NotesPage/NotesPage"
 import {Link,Routes,Route} from "react-router-dom"
 import LoginRegisterForm from "./components/LoginRegister/LoginRegisterForm";
+import NotifyMessage from "./components/Notify/NotifyMessage";
 
 function App() {
      const isLoggedIn=useSelector<any>((state)=>state.userReducer.isLoggedIn);
   
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
      <Routes>
         <Route path="/" element={<NotesPage/>}></Route>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<RegisterPage/>}></Route>    
      </Routes>
-     
    
     </div>
   )

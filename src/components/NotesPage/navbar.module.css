@@ -3,7 +3,7 @@
  flex-direction: row;
  justify-content: space-between;
  align-items: center;
-background-color: #ccf0e1;
+background-color: #5dd8f7;
 padding: 0 5%;
 }
 
@@ -34,11 +34,9 @@ li:hover{
 .inputTextContainer{
     margin-top: 20px;
     display: flex;
-     padding: 10px;
-     
+     padding: 5px;
     justify-content: center;
-  background-image: linear-gradient(rgb(250, 228, 187),rgb(130, 237, 247));
-  
+  background-image: linear-gradient(rgb(130, 237, 247),rgb(145, 145, 245));
 }
 
 .inputAreaHeader{
@@ -50,18 +48,19 @@ height:30px;
 .toTypeTextInput{
     display: flex;
     flex-direction: column;
+ 
 }
 .inputTitle{
 width:600px;
  max-height: 700px;
     border: 1px solid #ccc;
     outline: none;
-    font-size: 18px;
+    font-size: 20px;
 }
 .textArea{
   width: 600px;
    max-height: 500px;
-      border: 1px solid #ccc;
+  border: 1px solid #ccc;
   font-size: 15px;
   height: 100%;
   outline: none;
@@ -69,7 +68,6 @@ width:600px;
  scroll-behavior: smooth;
 }
 .buttonPosition{
-  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,16 +111,46 @@ word-break: break-word;
  line-height: 25px;
  text-overflow: ellipsis;
  overflow: hidden;
-
-
   /* max-width: 300px; 
   max-height:300px; */
 }
+
+.noteTopContainer:hover{
+  background-color: whitesmoke;
+  cursor: pointer;
+ 
+}
+.notesDiv{
+  display: flex;
+ align-items: center;
+ justify-content: center;
+}
+.notesDiv div{
+  display: flex;
+  align-items: center;
+  margin: 4px;
+}
+.notesDiv:first-child:hover{
+cursor: pointer;
+}
+
 
 .allNoteContainer{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+ height: 100%;
+flex:1
+}
+.topNoteContainer{
+  padding-top: 20px;
+}
+
+.pinnedNoteContainer{
+  display: flex;
+  align-items: center;
+  
   flex-wrap: wrap;
  height: 100%;
 flex:1
@@ -146,12 +174,10 @@ white-space: nowrap;
   top:50%;
   left: 50%;
   transform: translate(-50%,-50%);
-
  
 }
 .backgroundDark{
 background-color:rgba(139, 135, 135, 0.9);
-
 }
 
 .backgroundopacity{
@@ -160,10 +186,12 @@ background-color:rgba(139, 135, 135, 0.9);
 
 .fulllHieght{
 min-height: 100vh;
+
+
 }
 
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 650px) {
   .allCategories{
     display: none;
   }
@@ -175,7 +203,6 @@ min-height: 100vh;
     flex-direction: column;
   }
    .inputAreaHeader{
-   
 width:300px;
 }
 .inputTitle{
@@ -212,17 +239,19 @@ width:300px;
 .dropdownMenu{
   position: absolute;
   flex-direction: column;
+  min-width: 100px;
   justify-content: center;
   align-items: center;
   top: 59px;
-  visibility: none;
-  background-image: linear-gradient(rgb(249, 242, 230),rgb(185, 238, 243));
+  display: none;
+ background-image: linear-gradient(rgb(130, 237, 247),rgb(145, 145, 245));
   opacity: 0;
   right: 65px;
   transition: all 1s ease-in-out;
    border: none;
   border-radius: 8px;
   padding: 8px;
+  box-shadow: 0px 5px 4px 3px rgb(96, 96, 234,0.7);
 }
 .dropdownMenu.active{
    display: flex;
@@ -238,10 +267,33 @@ border-radius: 14px;
   font-size: 15px;
   padding: 6px 10px;
   text-align: center;
+  color:  black;
   /* background-color: rgb(127, 225, 255); */
   font-weight: "bold";
   margin: 5px 0;
 }
 .dropdownMenu li:hover{
   background-color: rgb(127, 127, 244);
+}
+
+.sideBarActive{
+  /* position: relative; */
+  display: flex;
+ justify-content: center;
+  width: 100%;
+}
+
+
+.sidebarActiveScroll{
+  height: 100vh;
+  width: 100%;
+  flex:1;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin: 0;
+}
+.editBackground{
+  position: fixed;
+height: 100vh;
+background-color: red;
 }
