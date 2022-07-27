@@ -96,6 +96,7 @@ function deleteTrashNote(){
  dispatch(userActions.setNotifyMessage({
       message:"Note Permenantly Deleted"
      }))   
+    dispatch(userActions.setNotetoEdit(null))   
 }
 function restoreNote(){
   dispatch(userActions.deleteTrashNote(editNote._id))
@@ -103,6 +104,7 @@ function restoreNote(){
   dispatch(userActions.setNotifyMessage({
       message:"Restored Successfully"
      }))
+  dispatch(userActions.setNotetoEdit(null))  
 }
   return ( 
 

@@ -75,6 +75,7 @@ function NotesPage() {
   function handleEditClose(){
     if( editNote!=null)
     dispatch(userActions.setNotetoEdit(null))
+   
    //setShowAccount(false)
   }
  function toggleShowAccount(){

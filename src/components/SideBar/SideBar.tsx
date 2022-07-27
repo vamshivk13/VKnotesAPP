@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { userActions } from '../../store/store'
 function SideBar({isActive,onBackDropPress}:any) {
   const mode=useSelector((state:any)=>state.userReducer.mode)
+  const userDetails:any=useSelector<any>((state)=>state.userReducer.userDetails)
   const dispatch=useDispatch()
   function handleTrash(){
     const userID:any=localStorage.getItem("userID")
@@ -17,7 +18,7 @@ function SideBar({isActive,onBackDropPress}:any) {
 
   return (
     <>
-    {/* <div onClick={onBackDropPress} className={ `${isActive&&styles.sidebarbackdrop}`}></div> */}
+    {/* <div onClick={()=>alert("clicked")} className={`${isActive&&styles.sidebarbackdrop}`}></div> */}
     <div className={`${styles.sideBar} ${isActive&&styles.sideBarActive}`}>  
         <ul>
         <li className={`${mode=="All Notes"&&styles.activeTab}`} onClick={handleAllNotes}>All Notes</li>
