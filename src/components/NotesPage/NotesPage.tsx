@@ -74,8 +74,9 @@ function NotesPage() {
   }
   function handleEditClose(){
     if( editNote!=null)
+    {
     dispatch(userActions.setNotetoEdit(null))
-   
+    dispatch(userActions.refreshAllNotes())}
    //setShowAccount(false)
   }
  function toggleShowAccount(){
@@ -88,7 +89,7 @@ function NotesPage() {
     {isAuthenticated&&
     <div style={{minHeight:"100vh"}} onClick={handleEditClose}>
     <div >
-   <NavBar setShowAccount={toggleShowAccount} showAccount={showAccount} handleLogout={handleLogout}/>
+   <NavBar socket={socket} setShowAccount={toggleShowAccount} showAccount={showAccount} handleLogout={handleLogout}/>
    <div className={styles.sideBarActive}>
    <SideBar onBackDropPress={()=>{dispatch(userActions.toggleSidebarActive())}} isActive={isSideBarActive}/>
    <div className={`${isSideBarActive&& styles.sidebarActiveScroll}`}>
@@ -113,7 +114,7 @@ function NotesPage() {
     </div>
   }
    {
-      editNote!=null&&<NotesInputEdit />
+      editNote!=null&&<NotesInputEdit socket={socket} />
     }
   </div>
   </>);

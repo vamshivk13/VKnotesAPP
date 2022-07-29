@@ -33,7 +33,8 @@ const userSlice = createSlice({
     mode:"All Notes",
     matchedNotes:[],
     notifyMessage:null,
-    pinnedNotes:[]
+    pinnedNotes:[],
+    refresh:false,
   },
 
   reducers: {
@@ -123,6 +124,9 @@ const userSlice = createSlice({
     },
     deleteTrashNote:(state:any,action:any)=>{
       state.trashNotes=state.trashNotes.filter((note:any)=>note._id!=action.payload)
+    },
+    refreshAllNotes:(state:any)=>{
+      state.refresh=!state.refresh
     }
 
   },

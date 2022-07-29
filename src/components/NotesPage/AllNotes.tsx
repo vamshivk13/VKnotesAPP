@@ -12,6 +12,8 @@ function AllNotes({dataItem}:any) {
     const pinnedNotes:any=useSelector<any>((state)=>state.userReducer.pinnedNotes);
    // const user:any=useSelector<any>((state)=>state.userReducer.userDetails);
   const userDetails:any=useSelector<any>((state)=>state.userReducer.userDetails)
+    const refresh:any=useSelector<any>((state)=>state.userReducer.refresh)
+
 console.log("MATCHED",dataItem);
   const dispatch=useDispatch();
     const allNoteUrl = API_URL.getAllNotes
@@ -35,7 +37,7 @@ console.log("MATCHED",dataItem);
     }
     getAllNotes();
 
-   },[userDetails])
+   },[userDetails,refresh])
   return (
    
     <div className={styles.topNoteContainer}>
@@ -43,7 +45,6 @@ console.log("MATCHED",dataItem);
       <div className={styles.pinnedNoteContainer}>
       {pinnedNotes?.map((item:any)=>{
         return <NoteItem key={item._id}  dataItem={item}/>
-      
       })}
       </div>
       </>}

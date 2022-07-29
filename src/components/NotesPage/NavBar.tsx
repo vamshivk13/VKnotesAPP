@@ -9,13 +9,21 @@ import { Avatar, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SyncIcon from '@mui/icons-material/Sync';
 
-function NavBar({handleLogout,showAccount,setShowAccount}:any) {
+function NavBar({handleLogout,showAccount,setShowAccount,socket}:any) {
     const [sidebarActive,setisSidebarActive]=useState<boolean>(false)
     const [isSearchBarOpen,setisSearchBarOpen]=useState<boolean>(false)
     const [searchText,setSearchText]=useState<string>("")
    const userDetails=useSelector((state:any)=>state.userReducer.userDetails)
+   const [isUpdating,setIsUpdating]=useState<any>(true);
    const dispatch=useDispatch();
+   useEffect(()=>{
+      socket.on("updateStart",({updated}:any)=>{
+       console.log("updateStatus",updated)
+       setIsUpdating(updated)
+      });
+   },[])
  function handleMyNotes(){
     console.log("handleMyNotes")
  }
@@ -62,7 +70,7 @@ function openSideBAr(){
     <div className={styles.topContainer}>
     <div className={styles.notesDiv}>
     <div onClick={openSideBAr}>{!sidebarActive? <MenuIcon/>:<MenuBookIcon/>}</div>
-    <div>Notes</div>
+   <div>Notes</div>
     </div>
     <div className={style.searchBar}>
     <div className={`${style.searchIconBar} ${isSearchBarOpen&&style.isActive}` }>
@@ -73,6 +81,7 @@ function openSideBAr(){
     </div>
     </div>
      <div className={styles.allCategories}>
+    <SyncIcon className={`${!isUpdating?style.syncActive:style.syncInactive}`} />
      <div className={styles.dropDownButton} onClick={setShowAccount}><Avatar></Avatar></div>
       {
       <div className={`${styles.dropdownMenu} ${showAccount&&styles.active}`}>

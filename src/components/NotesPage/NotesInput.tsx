@@ -6,6 +6,7 @@ import API_URL from '../api';
 import styles from "./navbar.module.css"
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
+import { Refresh } from '@mui/icons-material';
 function NotesInput({socket}:any) {
     const [noteText,setNoteText]=useState("");
     const [title,setTitle]=useState("");
@@ -14,36 +15,57 @@ function NotesInput({socket}:any) {
     const editNote:any=useSelector<any>((state)=>state.userReducer.noteToEdit)
     const userDetails:any=useSelector<any>((state)=>state.userReducer.userDetails)
     const url=API_URL.postNote
+    const newNoteRef=useRef<any>(null);
     const dispatch=useDispatch();
     const id=useId();
     console.log("userDETAILS",userDetails);
-  function handleNoteText(e:any){
-   setNoteText(e.target.value);
-   console.log(noteText)
-  }
+  
+  useEffect(()=>{
+     socket.on("noteCreated",(noteData:any)=>{
+      console.log("noteData",noteData)
+      newNoteRef.current=noteData;
+     })
+     return ()=>{
+      socket.emit("discardIfEmpty",newNoteRef.current)
+     }
+   },[socket])
+
+
+ 
   function openNotesModal(){
-   setNotesModalVisible(true)
+  socket?.emit("createNote",{ 
+             note:"",
+             noteTitle:"",
+             userId:userDetails.id})
+    setNotesModalVisible(true)
   }
   function handleTitle(e:any){
     setTitle(e.target.value)
+     socket?.emit("updateNote",{
+            id:newNoteRef.current?._id,
+            note:noteText,
+             noteTitle:e.target.value,
+  })
   }
   function handleNoteInput(e:any){
  
 textAreaRef.current.style.height="auto";
   textAreaRef.current.style.height=`${e.target.scrollHeight}px`;
   setNoteText(e.target.value)
-  console.log("socketSend",socket)
-  // socket?.emit("sendNote",{ 
-  //            note:e.target.value,
-  //            noteTitle:title,
-  //            userId:userDetails.id})
+
+  socket?.emit("updateNote",{
+            id:newNoteRef.current?._id,
+            note:e.target.value,
+             noteTitle:title,
+  })
   }
 
 
   function submitNote(){
     if(noteText=="")
     {
-       setNotesModalVisible(false);
+      socket?.emit("deleteNote",{id:newNoteRef.current?._id})
+      setNotesModalVisible(false);
       return;
     }
     const sendData={
@@ -55,12 +77,26 @@ textAreaRef.current.style.height="auto";
              userId:userDetails.id
         }
     }
+    if(newNoteRef.current){
+       setNoteText("")
+       setTitle("")
+       setNotesModalVisible(false)
+       dispatch(userActions.refreshAllNotes())
+      return ;
+    }
     dispatch(userActions.sendNotesToMdb(sendData))
     setNoteText("")
     setTitle("")
      setNotesModalVisible(false)
   }
-
+function handleNoteInputClose(){
+  if(noteText==""||title==""){
+      socket?.emit("deleteNote",{id:newNoteRef.current?._id})
+  }
+   setNoteText("")
+   setTitle("")
+  setNotesModalVisible(false)
+}
   return ( 
     <div >
    <div className={`${styles.noteContainer} `}>
@@ -72,7 +108,7 @@ textAreaRef.current.style.height="auto";
              <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
         
              <div className={styles.buttonPosition}>
-              <IconButton onClick={()=>setNotesModalVisible(false)}>
+              <IconButton onClick={handleNoteInputClose}>
                 <CloseIcon/>
               </IconButton>
               <IconButton onClick={submitNote}>

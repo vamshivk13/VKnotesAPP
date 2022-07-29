@@ -1,11 +1,10 @@
 .searchBar{
     display: flex;
     flex:0.75;
-
 }
 .searchIconBar{
     display: flex;
-    width: 70%;
+    flex:0.7;
     align-items: center;
 }
 .searchIconBar.isActive{
@@ -20,4 +19,14 @@
     border: none;
     outline: none; 
     background:transparent; 
+}
+
+.syncInactive{
+    color: white;
+    visibility: hidden;
+}
+
+.syncActive{
+    color: white;
+    visibility: visible;
 }

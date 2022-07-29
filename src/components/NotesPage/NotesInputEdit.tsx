@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
-function NotesInput({initalNotes}:any) {
+function NotesInput({initalNotes,socket}:any) {
     const [noteText,setNoteText]=useState(initalNotes);
     const [title,setTitle]=useState("")
     const textAreaRef=useRef<any>(null);
@@ -27,14 +27,25 @@ function NotesInput({initalNotes}:any) {
 
   function handleTitle(e:any){
     setTitle(e.target.value)
+    socket?.emit("updateNote",{
+            id:editNote._id,
+            note:noteText,
+             noteTitle:e.target.value,
+  })
   }
  
   function handleNoteInput(e:any){
 
 textAreaRef.current.style.height="auto";
   textAreaRef.current.style.height=`${e.target.scrollHeight}px`;
-
+ 
   setNoteText(e.target.value)
+
+   socket?.emit("updateNote",{
+            id:editNote._id,
+            note:e.target.value,
+             noteTitle:title,
+  })
   
   }
  useEffect(()=>{
@@ -73,7 +84,7 @@ textAreaRef.current.style.height="auto";
     }
     dispatch(userActions.deleteCurrentNotefromDb(sendData))
     dispatch(userActions.setNotifyMessage({
-      message:"Deleted Note Successfully"
+      message:"Note Trashed Successfully"
      }))
     dispatch(userActions.deleteCurrentNote(editNote))
        dispatch(userActions.setNotetoEdit(null))
@@ -85,6 +96,7 @@ textAreaRef.current.style.height="auto";
      }))
   }
 function handleClose(){
+  //dispatch(userActions.refreshAllNotes()) //new
   dispatch(userActions.setNotetoEdit(null))
 }
 function pinNote(){
