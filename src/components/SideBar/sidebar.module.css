@@ -62,7 +62,7 @@
     .sideBar{
         position: sticky;
         height: 100vh;
-        min-width: 200px;
+        width: 100%;
     }
     
 }

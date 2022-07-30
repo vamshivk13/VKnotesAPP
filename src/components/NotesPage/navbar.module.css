@@ -192,16 +192,10 @@ min-height: 100vh;
 
 
 @media screen and (max-width: 650px) {
-  .allCategories{
-    display: none;
-  }
-  .topContainer{
-    /* flex-direction: column; */
-  }
-  .allCategories{
-    display: flex;
-    flex-direction: column;
-  }
+ .topContainer{
+  overflow: hidden;
+  
+ }
    .inputAreaHeader{
 width:300px;
 }

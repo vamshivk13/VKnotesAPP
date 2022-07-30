@@ -80,8 +80,8 @@ function openSideBAr(){
     </IconButton>
     </div>
     </div>
+     <SyncIcon className={`${!isUpdating?style.syncActive:style.syncInactive}`} />
      <div className={styles.allCategories}>
-    <SyncIcon className={`${!isUpdating?style.syncActive:style.syncInactive}`} />
      <div className={styles.dropDownButton} onClick={setShowAccount}><Avatar></Avatar></div>
       {
       <div className={`${styles.dropdownMenu} ${showAccount&&styles.active}`}>

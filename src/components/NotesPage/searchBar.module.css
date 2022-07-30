@@ -14,7 +14,7 @@
 }
 .searchIconBar> input{
     font-size: 18px;
-    flex:1;
+    flex: 1;
     height: 20px;
     border: none;
     outline: none; 
@@ -29,4 +29,21 @@
 .syncActive{
     color: white;
     visibility: visible;
+}
+
+
+@media screen and (max-width: 650px) {
+ .searchIconBar> input{
+    font-size: 14px;
+ }
+}
+@media screen and (max-width: 550px) {
+ .searchIconBar> input{
+    font-size: 12px;
+ }
+}
+@media screen and (max-width: 400px) {
+ .searchIconBar> input{
+    font-size: 10px;
+ }
 }
