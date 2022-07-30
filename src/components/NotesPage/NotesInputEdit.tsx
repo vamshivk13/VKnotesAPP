@@ -125,7 +125,7 @@ function restoreNote(){
            <div className={styles.toTypeTextInput}>
             <input onChange={handleTitle} value={title} className={styles.inputTitle} placeholder="Title" type="text"></input>
              {/* <div className={styles.inputElement}> */}
-             <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
+             <textarea value={noteText} autoFocus={true}  ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
              {/* </div> */}
              <div className={styles.buttonPosition}>
               <IconButton onClick={handleClose}>

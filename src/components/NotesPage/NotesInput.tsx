@@ -101,11 +101,11 @@ function handleNoteInputClose(){
     <div >
    <div className={`${styles.noteContainer} `}>
       <div className={`${styles.inputTextContainer} ${editNote!=null?styles.backgroundopacity:""}`}>
-          { !isModalVisible ?<div className={styles.inputAreaHeader} onClick={openNotesModal}><div style={{padding:5,fontSize:15}}>type something...</div></div> 
+          { !isModalVisible ?<div className={styles.inputAreaHeader} onClick={openNotesModal}><div style={{padding:5,fontSize:15,fontWeight:"bold"}}>type something...</div></div> 
           :
            <div className={styles.toTypeTextInput}>
             <input value={title} onChange={handleTitle} className={styles.inputTitle} placeholder="Title" type="text"></input>
-             <textarea value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
+             <textarea autoFocus={true} value={noteText} ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>
         
              <div className={styles.buttonPosition}>
               <IconButton onClick={handleNoteInputClose}>
