@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { userActions } from "../../store/store";
-import AllNotes from "./AllNotes";
+import { Suspense } from "react";
+import { Box, CircularProgress } from "@mui/material";
+// import AllNotes from "./AllNotes";
+
 import NotesInput from "./NotesInput";
 import styles from "./navbar.module.css"
 import NotesInputEdit from "./NotesInputEdit";
@@ -13,6 +16,7 @@ import SideBar from "../SideBar/SideBar";
 import NotifyMessage from "../Notify/NotifyMessage";
 import { io } from "socket.io-client";
 import { baseUrl } from "../api";
+const AllNotes = React.lazy(() => import("./AllNotes.js"));
 function NotesPage() {
     const userData:any=useSelector<any>((state)=>state.userReducer.userDetails)
       const editNote:any=useSelector<any>((state)=>state.userReducer.noteToEdit)
@@ -21,8 +25,7 @@ function NotesPage() {
     const matchedNotes=useSelector((state:any)=>state.userReducer.matchedNotes)
     const trashNotes=useSelector((state:any)=>state.userReducer.trashNotes)
     const mode=useSelector((state:any)=>state.userReducer.mode)
-
-      const [isAuthenticated,setIsAuthenticated]=useState<any>(false)
+    const [isAuthenticated,setIsAuthenticated]=useState<any>(false)
    console.log("editNote",editNote);
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -97,7 +100,14 @@ function NotesPage() {
     <>
      
    <NotesInput socket={socket}/>
+   <Suspense fallback={ 
+    <div style={{display:"flex", flex:1,height:"100%", justifyContent:"center",alignItems:"center"}}>
+      loading
+      <CircularProgress />
+      </div>
+   }>
    <AllNotes/>
+   </Suspense>
    </>}
    {
     mode=="Search"&&
