@@ -8,8 +8,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Logout } from '@mui/icons-material'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SyncIcon from '@mui/icons-material/Sync';
+import { height } from '@mui/system'
 
 function NavBar({handleLogout,showAccount,setShowAccount,socket}:any) {
     const [sidebarActive,setisSidebarActive]=useState<boolean>(false)
@@ -85,11 +87,18 @@ function openSideBAr(){
      <div className={styles.dropDownButton} onClick={setShowAccount}><Avatar></Avatar></div>
       {
       <div className={`${styles.dropdownMenu} ${showAccount&&styles.active}`}>
-      <ul> 
-        <li>{userDetails.name}</li>
-        <li>{userDetails.email}</li>
-        <li onClick={handleLogout}>logout</li>
+      <div className={styles.dropdownTop}> 
+      <Avatar></Avatar>
+      <div className={styles.dropdownTopText}>
+        <div className={styles.userName}>{userDetails.name}</div>
+        <div className={styles.userEmail}>{userDetails.email}</div>
+        </div>
+      </div>
+      <ul onClick={handleLogout}>
+      <Logout className={styles.logoutIcon}></Logout>
+      <li>Logout</li>
       </ul>
+  
       </div>
      }
      </div>
