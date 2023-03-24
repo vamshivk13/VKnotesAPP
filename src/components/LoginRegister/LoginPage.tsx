@@ -20,7 +20,8 @@ function LoginPage() {
   function handlePasswordInput(e:any){
    setPassword(e.target.value);
   }
-  async function handleLogin(){
+  async function handleLogin(e:any){
+    e.preventDefault()
    console.log(email,password)
    const loginObj={url,userData:{
     email,password
@@ -50,7 +51,7 @@ function LoginPage() {
         <label htmlFor='password'>Password</label>
         <input value={password} placeholder='password' onChange={handlePasswordInput} type="password" id='password'></input>
       </div>
-      <button className={styles.buttonStyle} onClick={handleLogin} type='button'>login</button>
+      <button type='submit' className={styles.buttonStyle} onClick={handleLogin}>login</button>
       <div className={styles.link}>
        <Link to="/register">
          Create an Account

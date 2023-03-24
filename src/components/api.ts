@@ -1,7 +1,9 @@
-//export const baseUrl="http://localhost:3001/"
-export const baseUrl="https://notesappvk.herokuapp.com/"
+
+
+export const baseUrl= (import.meta.env.VITE_ENV == "PROD") ? "https://notesappvk.onrender.com/" : "http://localhost:3001/"
+//export const baseUrl="https://notesappvk.herokuapp.com/"
 const API_URL={
-    auth:baseUrl+"auth/loginUser",
+    auth:baseUrl+"auth/loginUser", 
      registerUser:baseUrl+"auth/registerUser",
     refreshToken:baseUrl+"auth/authorize",
     getAllNotes:baseUrl+"crud/getAllNotes",

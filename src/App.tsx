@@ -12,7 +12,7 @@ import NotifyMessage from "./components/Notify/NotifyMessage";
 
 function App() {
      const isLoggedIn=useSelector<any>((state)=>state.userReducer.isLoggedIn);
-  
+  console.log(import.meta.env.VITE_ENV)
 
   return (
     <div style={{position:"relative"}}>
