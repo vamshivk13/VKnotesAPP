@@ -6,9 +6,11 @@ import { userActions } from '../../store/store';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import API_URL from '../api';
 import NotifyMessage from '../Notify/NotifyMessage';
+import LinearProgress from '@mui/material/LinearProgress';
 function LoginPage() {
   const [email,setEmail]=useState<string>("");
   const [password,setPassword]=useState<string>("");
+  const [isLoading,setIsloading]=useState(false);
   const url=API_URL.auth
   const navigate=useNavigate();
   const userDetails=useSelector<any>((state)=>state.userReducer.userDetails)
@@ -22,12 +24,13 @@ function LoginPage() {
   }
   async function handleLogin(e:any){
     e.preventDefault()
+    setIsloading(true);
    console.log(email,password)
    const loginObj={url,userData:{
     email,password
    }}
    dispatch(userActions.authAddUser(loginObj))
-  
+   //setIsloading(false);
   }
 
   useEffect(()=>{
@@ -42,6 +45,7 @@ function LoginPage() {
     <div className={styles.topContainer}>
        <NotifyMessage/>
      <form className={styles.form}>
+             {isLoading && <LinearProgress color='success'/>}
       <h1>Login</h1>
       <div className={styles.inputElement}>
         <label htmlFor='email'>Email</label>

@@ -1,7 +1,8 @@
-import { IconButton } from '@mui/material';
+import { CircularProgress, IconButton } from '@mui/material';
 import React, { useRef, useState ,useId, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../store/store';
+import LinearProgress from '@mui/material/LinearProgress';
 import API_URL from '../api';
 import styles from "./navbar.module.css"
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,6 +14,7 @@ import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 function NotesInput({initalNotes,socket}:any) {
     const [noteText,setNoteText]=useState(initalNotes);
     const [title,setTitle]=useState("")
+    const [isEditLoading,setIsEditLoading]=useState(false);
     const textAreaRef=useRef<any>(null);
     const [isModalVisible,setNotesModalVisible]=useState(false)
     const [beforeEditNote,setBeforeEditNote]=useState(null);
@@ -60,6 +62,7 @@ textAreaRef.current.style.height="auto";
   },[editNote])
 
   function submitNote(){
+    setIsEditLoading(true);
     const sendData={
         url:url,
         noteData:{
@@ -72,8 +75,9 @@ textAreaRef.current.style.height="auto";
     }
     dispatch(userActions.deleteCurrentNote(editNote))
     dispatch(userActions.sendUpdatedNotesToMdb(sendData))
-   dispatch(userActions.setNotetoEdit(null))
+   //dispatch(userActions.setNotetoEdit(null))
     setNotesModalVisible(false);
+
   }
   function deleteNote(){
     const sendData={
@@ -119,10 +123,11 @@ function restoreNote(){
   dispatch(userActions.setNotetoEdit(null))  
 }
   return ( 
-
-   <div className={styles.editnoteContainer}>
-      <div className={styles.inputTextContainer}>    
+   
+   <div className={styles.editnoteContainer}> 
+      <div className={styles.inputTextContainer}> 
            <div className={styles.toTypeTextInput}>
+                {isEditLoading && <LinearProgress/>} 
             <input onChange={handleTitle} value={title} className={styles.inputTitle} placeholder="Title" type="text"></input>
              {/* <div className={styles.inputElement}> */}
              <textarea value={noteText} autoFocus={true}  ref={textAreaRef}  placeholder='type something...' className={styles.textArea} onChange={handleNoteInput}></textarea>

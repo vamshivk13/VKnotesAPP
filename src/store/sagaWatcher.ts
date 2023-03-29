@@ -78,6 +78,7 @@ function* sendUpdatedNotesToDb(payload:any):any{
     const resp=yield call(()=>handleUpdateNoteApi(payload));
     console.log("Adding data to AllNotes",resp)
     yield put(userActions.addNotes(resp.data))
+    yield put(userActions.setNotetoEdit(null))
   }
   catch(err){
    alert("unable to add Note")
