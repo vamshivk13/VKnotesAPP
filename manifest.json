@@ -2,7 +2,7 @@
   "name": "VkNotesApp",
   "short_name": "Notes",
   "theme_color": "#ffffff",
-  "background_color": "#2196f3",
+  "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
