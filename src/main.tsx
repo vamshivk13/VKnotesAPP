@@ -4,6 +4,8 @@ import App from './App'
 import { Provider } from 'react-redux'
 import {BrowserRouter} from "react-router-dom"
 import store from "./store/store"
+import registerServiceWorker from '../serviceWorkerRegistration';
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
     <Provider store={store}>
@@ -11,3 +13,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </Provider>
     </BrowserRouter>
 )
+registerServiceWorker()
