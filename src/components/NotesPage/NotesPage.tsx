@@ -89,6 +89,7 @@ function NotesPage() {
     <>
   <div className={`${styles.fulllHieght} ${editNote!=null?styles.backgroundDark:""}`}>
     <NotifyMessage/>
+ 
     {isAuthenticated&&
     <div style={{minHeight:"100vh"}} onClick={handleEditClose}>
     <div >
